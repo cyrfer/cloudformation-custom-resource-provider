@@ -1,6 +1,4 @@
-// const {stringify} = require('flatted/cjs');
 const stringify = JSON.stringify;
-const axios = require('axios');
 const types = require('./registry');
 const resourceRegex = /Custom::(.+)/;
 const { sendResponse, StatusEnum } = require('./cfn-response');
@@ -20,7 +18,7 @@ exports.handler = async (event, context) => {
         console.log('event:', stringify(event));
         const matchResourceType = resourceRegex.exec(event.ResourceType || '');
         // console.log(matchResourceType);
-        if (matchResourceType && matchResourceType.length < 2) {
+        if (!matchResourceType || matchResourceType.length < 2) {
             throw {message: `could not parse resource type: ${event.ResourceType}`}
         }
         const resourceType = matchResourceType[1];

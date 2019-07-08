@@ -2,8 +2,9 @@ var https = require("https");
 var url = require("url");
 
 
-// adapted from
-// https://github.com/rosberglinhares/CloudFormationCognitoCustomResources/blob/master/CloudFormationSendResponse/index.js
+//// adapted from
+//// https://github.com/rosberglinhares/CloudFormationCognitoCustomResources/blob/master/CloudFormationSendResponse/index.js
+// const axis = require('axios');
 // const sendResponse = async (event, context, status, result) => {
 //     console.log('sendResponse: result:', result);
 //     const response = {
@@ -48,7 +49,7 @@ var url = require("url");
 exports.sendResponse = async (event, context, responseStatus, responseData, physicalResourceId, noEcho) => {
     var responseBody = JSON.stringify({
         Status: responseStatus,
-        Reason: "See the details in CloudWatch Log Stream: " + context.logStreamName,
+        Reason: responseData.message || "See the details in CloudWatch Log Stream: " + context.logStreamName,
         PhysicalResourceId: physicalResourceId || context.logStreamName,
         StackId: event.StackId,
         RequestId: event.RequestId,

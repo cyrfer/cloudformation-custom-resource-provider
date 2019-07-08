@@ -3,7 +3,7 @@ const { testSetup, loadInput, loadApp } = require('./framework');
 
 const sinon = require('sinon');
 
-const isIntegration = true;
+const isIntegration = false;
 
 // TODO: allow this to be registered with a factory
 const mockAwsResponse = (stub) => () => {
@@ -35,20 +35,54 @@ const expectsDeleteCognitoDomain = [
     {value: '', moduleName: 'axios', method: 'put', spy: null, compare: 'equal', spyKey: 'args.0.0'.split('.')},
 ];
 
+const mocksDeleteCognitoAppSettings = [];
+const expectsDeleteCognitoAppSettings = [];
+
+const mocksCreateCognitoAppSettings = [];
+const expectsCreateCognitoAppSettings = [];
+
 describe('lambda', () => {
-    describe('CognitoDomain', () => {
-        describe('delete', () => {
-            describe('missing resource', testSetup({
+    describe('CognitoAppClientSettings', () => {
+        describe('create', () => {
+            describe('apply custom resource', testSetup({
                 app: loadApp({path: '../src/index', key: 'handler'}),
                 test: {
                     name: 'should report success',
-                    args: loadInput([{__filepath: './data/event-delete-domain.json'}, {}]),
-                    mocks: isIntegration ? [] : mocksDeleteCognitoDomain,
-                    expects: expectsDeleteCognitoDomain,
+                    args: loadInput([{__filepath: './data/event-create-app-settings.json'}, {}]),
+                    mocks: isIntegration ? [] : mocksCreateCognitoAppSettings,
+                    expects: expectsCreateCognitoAppSettings,
                     networkEnabled: isIntegration,
                     only: true,
                 }
             }))
+        });
+        // describe('delete', () => {
+        //     describe('nothing to do', testSetup({
+        //         app: loadApp({path: '../src/index', key: 'handler'}),
+        //         test: {
+        //             name: 'should report success',
+        //             args: loadInput([{__filepath: './data/event-delete-app-settings.json'}, {}]),
+        //             mocks: isIntegration ? [] : mocksDeleteCognitoAppSettings,
+        //             expects: expectsDeleteCognitoAppSettings,
+        //             networkEnabled: isIntegration,
+        //             only: true,
+        //         }
+        //     }))
+        // });
+    });
+    // describe('CognitoDomain', () => {
+    //     describe('delete', () => {
+    //         describe('missing resource', testSetup({
+    //             app: loadApp({path: '../src/index', key: 'handler'}),
+    //             test: {
+    //                 name: 'should report success',
+    //                 args: loadInput([{__filepath: './data/event-delete-domain.json'}, {}]),
+    //                 mocks: isIntegration ? [] : mocksDeleteCognitoDomain,
+    //                 expects: expectsDeleteCognitoDomain,
+    //                 networkEnabled: isIntegration,
+    //                 only: true,
+    //             }
+    //         }))
             // describe('successes', testSetup({
             //     app: loadApp({path: '../src/index', key: 'handler'}),
             //     test: {
@@ -59,7 +93,7 @@ describe('lambda', () => {
             //         only: true,
             //     }
             // }))
-        });
+        // });
         // describe('create', () => {
         //     describe('failures', testSetup({
         //         app: loadApp({path: '../src/index', key: 'handler'}),
@@ -72,5 +106,5 @@ describe('lambda', () => {
         //         },
         //     }));
         // });
-    });
+    // });
 });
