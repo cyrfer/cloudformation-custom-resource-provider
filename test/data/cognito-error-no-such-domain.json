@@ -1,0 +1,9 @@
+{
+    "message": "No such domain or user pool exists.",
+    "code": "InvalidParameterException",
+    "time": "2019-07-08T09:57:41.817Z",
+    "requestId": "a14fea3b-3b8e-482a-9f39-2c4a834a661d",
+    "statusCode": 400,
+    "retryable": false,
+    "retryDelay": 98.61126726587473
+}

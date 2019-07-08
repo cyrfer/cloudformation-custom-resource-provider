@@ -1,0 +1,15 @@
+{
+    "RequestType": "Delete",
+    "ServiceToken": "arn:aws:lambda:us-west-2:<omitted>:function:cfn-custom-resource-function",
+    "ResponseURL": "https://cloudformation-custom-resource-response-uswest2.s3-us-west-2.amazonaws.com/<omitted>",
+    "StackId": "arn:aws:cloudformation:us-west-2:<omitted>:stack/crowdsource-auth-dev/ec638160-a15f-11e9-ac64-0688a7bf983a",
+    "RequestId": "e6527f0a-e734-4440-a2c9-230bec642fe7",
+    "LogicalResourceId": "AppClientDomain",
+    "PhysicalResourceId": "crowdsource-auth-dev-AppClientDomain-1LLUNYIZH7PXP",
+    "ResourceType": "Custom::CognitoAppClientDomain",
+    "ResourceProperties": {
+        "ServiceToken": "arn:aws:lambda:us-west-2:<omitted>:function:cfn-custom-resource-function",
+        "UserPoolId": "us-west-2_iVRfkKm1n",
+        "Domain": "temp-domain-prefix-12345"
+    }
+}

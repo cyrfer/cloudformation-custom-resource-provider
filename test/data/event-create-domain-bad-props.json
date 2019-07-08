@@ -1,0 +1,14 @@
+{
+  "RequestType": "Create",
+  "ServiceToken": "arn:aws:lambda:us-west-2:<omitted>:function:cfn-custom-resource-function",
+  "ResponseURL": "https://cloudformation-custom-resource-response-uswest2.s3-us-west-2.amazonaws.com/<omitted>",
+  "StackId": "arn:aws:cloudformation:us-west-2:<omitted>:stack/crowdsource-auth-dev/3aad5dc0-9dc1-11e9-b280-02759da24116",
+  "RequestId": "d3b77132-7e98-40a2-95fc-5f3770f8c11f",
+  "LogicalResourceId": "AppClientDomain",
+  "ResourceType": "Custom::CognitoAppClientDomain",
+  "ResourceProperties": {
+      "ServiceToken": "arn:aws:lambda:us-west-2:<omitted>:function:cfn-custom-resource-function",
+      "AppClientId": "40do2ud147055gc3gs9vbe910n",
+      "DomainPrefix": "temp-domain-prefix-12345"
+  }
+}

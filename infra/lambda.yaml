@@ -1,0 +1,44 @@
+
+Parameters:
+  S3Bucket:
+    Type: String
+  S3Key:
+    Type: String
+
+Resources:
+  FunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: "sts:AssumeRole"
+      Policies:
+        - PolicyName: !Sub '${AWS::StackName}-policy'
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action: "*"
+                Resource: "*"
+
+  Function:
+    Type: AWS::Lambda::Function
+    DependsOn:
+      - FunctionRole
+    Properties:
+      FunctionName: !Sub '${AWS::StackName}-function'
+      Role: !GetAtt FunctionRole.Arn
+      Timeout: '25'
+      Runtime: 'nodejs10.x'
+      Handler: 'index.handler'
+      Code:
+        S3Bucket: "contentnow-orch-lambda-functions"
+        S3Key: "cfn-custom-resource/lambda.zip"
+
+Outputs:
+  ServiceToken:
+    Value: !GetAtt Function.Arn

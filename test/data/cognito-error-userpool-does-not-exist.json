@@ -1,0 +1,9 @@
+{
+    "message": "User pool us-west-2_NAfceKcSj does not exist.",
+    "code": "ResourceNotFoundException",
+    "time": "2019-07-08T10:43:53.119Z",
+    "requestId": "8f4a633e-0a8d-45fa-943b-7b1ac7c45d87",
+    "statusCode": 400,
+    "retryable": false,
+    "retryDelay": 78.7842970902025
+}
