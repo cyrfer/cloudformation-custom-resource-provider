@@ -43,6 +43,8 @@ var url = require("url");
    This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied.
    See the License for the specific language governing permissions and limitations under the License. */
 
+// adapted from
+// https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-lambda-function-code-cfnresponsemodule.html#w2ab1c17c25c14b9c15
 exports.sendResponse = async (event, context, responseStatus, responseData, physicalResourceId, noEcho) => {
     var responseBody = JSON.stringify({
         Status: responseStatus,

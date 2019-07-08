@@ -1,3 +1,3 @@
 module.exports = {
-    "CognitoAppClientDomain": require("./CognitoAppClientDomain"),
+    "CognitoUserPoolDomain": require("./CognitoUserPoolDomain"),
 }
