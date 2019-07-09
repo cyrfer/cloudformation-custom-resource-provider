@@ -12,9 +12,25 @@ For the Custom Resource interfaces, see references here:
 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/crpg-ref.html
 
 # Prior Art
-Parts of this project were inspired by [cfn-lambda](https://github.com/andrew-templeton/cfn-lambda) which is a viable solution. My goals are to have a single stack with a single lambda capable of handling all custom resource types a developer chooses to register in the lambda code.
+AWS provides a python based ["helper"](https://github.com/aws-cloudformation/custom-resource-helper) but it does not bring much to the community in the way of support for missing resource types.
 
-Another project that seems to create a small ecosystem to support custom resources was published by [@rosberglinhares](https://github.com/rosberglinhares/CloudFormationCognitoCustomResources). This project also used a multi-lambda architecture which I intend to avoid for the sake of simplicity.
+AWS Document has an excellent [example](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/walkthrough-custom-resources-lambda-lookup-amiids.html) showcasing the advantages of using Custom Resource Types. This is a good intro to the concept.
+
+Some examples of managing resource types that are completely unrelated to AWS are:
+* [RandomString resource type](https://binx.io/blog/2018/08/25/building-cloudformation-custom-resources-is-plain-and-simple/)
+* [Github Webhook resource type](https://www.alexdebrie.com/posts/cloudformation-custom-resources/)
+
+[One github project](https://github.com/stelligent/cloudformation-custom-resources) seems to provide scaffolding in various languages supported by AWS Lambda, but contributes actually no custom resource suppport.
+
+A project that seems to create a small ecosystem to support custom resources was published by [@rosberglinhares](https://github.com/rosberglinhares/CloudFormationCognitoCustomResources). This project also used a multi-lambda architecture which I intend to avoid for the sake of simplicity.
+
+[ab77](https://github.com/ab77/cfn-generic-custom-resource#cognito-demo) had a lot of code in one spot, but I was confused by the ["agent"](https://github.com/ab77/cfn-generic-custom-resource/blob/master/cognito-idp/cognito-template.yaml) model he used in his templates.
+
+[emdgroup](https://github.com/emdgroup/cfn-custom-resource) was the only author I found advertising suppport for [Cognito UI Customization](https://github.com/emdgroup/cfn-custom-resource#cognitouicustomization).
+
+[base2Services](https://github.com/base2Services) provides a [package](https://github.com/base2Services/cloudformation-custom-resources-nodejs) that is very much inline with my goals. Unfortunately I discovered this project after I had a working POC and they did not have support for a [SAML](https://docs.aws.amazon.com/cognito/latest/developerguide/saml-identity-provider.html) resource which appears at `User Pool->Federation->Identity Providers`.
+
+I hope that this project can one day approach the degree of professionalism in [cfn-lambda](https://github.com/andrew-templeton/cfn-lambda), which looks to be a viable solution. Unfortunately, my design goals differed slightly from `cfn-lambda`. Mostly I wanted to have a single stack with a single lambda capable of handling all custom resource types a developer chooses to register in the lambda code rather than many lambdas deployed by who knows what processes.
 
 # Dependencies
 1. after `git clone`, you should run `npm install` as usual.
@@ -38,9 +54,34 @@ The latest additions are included by default. You can remove any you wish, or re
 Markdown tables created by [tablesgenerator](https://www.tablesgenerator.com/markdown_tables)
 
 ## Gaps in AWS Resources Coverage
-CognitoAppClientDomain Properties:
-- UserPoolId
-- Domain
-## Convenient Tasks
+[CognitoUserPoolDomain](https://github.com/rosberglinhares/CloudFormationCognitoCustomResources/blob/master/CloudFormationCognitoUserPoolDomain.js) Properties:
+- *UserPoolId
+- *Domain
+
+[CognitoAppClientSettings](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CognitoIdentityServiceProvider.html#updateUserPoolClient-property) Properties:
+- *ClientId
+- *UserPoolId
+- AllowedOAuthFlows
+- AllowedOAuthFlowsUserPoolClient
+- AllowedOAuthScopes
+- AnalyticsConfiguration
+- CallbackURLs
+- ClientName
+- DefaultRedirectURI
+- ExplicitAuthFlows
+- LogoutURLs
+- ReadAttributes
+- RefreshTokenValidity
+- SupportedIdentityProviders
+- WriteAttributes
+
+[CognitoUserPoolIdP](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CognitoIdentityServiceProvider.html#createIdentityProvider-property) Properties:
+- *ProviderDetails
+- *ProviderName
+- *ProviderType
+- *UserPoolId
+- AttributeMapping
+- IdpIdentifiers
+## Convenience Resources
 ## External Resources
-## Exotic Community
+## Exotic Community Resources

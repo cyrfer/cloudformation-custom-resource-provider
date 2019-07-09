@@ -12,7 +12,7 @@ const errorsEnum = {
 };
 
 // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CognitoIdentityServiceProvider.html#updateUserPoolClient-property
-const schemaDomainProps = {
+const schemaProps = {
     "type": "object",
     "required": [
         "ClientId",
@@ -94,7 +94,7 @@ const schemaDomainProps = {
     }
 };
 
-const validateProps = compile(schemaDomainProps);
+const validateProps = compile(schemaProps);
 
 // adapted from
 // https://github.com/rosberglinhares/CloudFormationCognitoCustomResources/blob/master/CloudFormationCognitoUserPoolClientSettings.js

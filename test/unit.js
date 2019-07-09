@@ -41,21 +41,39 @@ const expectsDeleteCognitoAppSettings = [];
 const mocksCreateCognitoAppSettings = [];
 const expectsCreateCognitoAppSettings = [];
 
+const mocksCreateCognitoUserPoolIdP = [];
+const expectsCreateCognitoUserPoolIdP = [];
+
 describe('lambda', () => {
-    describe('CognitoAppClientSettings', () => {
+    describe('CognitoUserPoolIdP', () => {
         describe('create', () => {
             describe('apply custom resource', testSetup({
                 app: loadApp({path: '../src/index', key: 'handler'}),
                 test: {
                     name: 'should report success',
-                    args: loadInput([{__filepath: './data/event-create-app-settings.json'}, {}]),
-                    mocks: isIntegration ? [] : mocksCreateCognitoAppSettings,
-                    expects: expectsCreateCognitoAppSettings,
+                    args: loadInput([{__filepath: './data/event-create-userpool-idp.json'}, {}]),
+                    mocks: isIntegration ? [] : mocksCreateCognitoUserPoolIdP,
+                    expects: expectsCreateCognitoUserPoolIdP,
                     networkEnabled: isIntegration,
                     only: true,
                 }
             }))
-        });
+        })
+    });
+    // describe('CognitoAppClientSettings', () => {
+        // describe('create', () => {
+        //     describe('apply custom resource', testSetup({
+        //         app: loadApp({path: '../src/index', key: 'handler'}),
+        //         test: {
+        //             name: 'should report success',
+        //             args: loadInput([{__filepath: './data/event-create-app-settings.json'}, {}]),
+        //             mocks: isIntegration ? [] : mocksCreateCognitoAppSettings,
+        //             expects: expectsCreateCognitoAppSettings,
+        //             networkEnabled: isIntegration,
+        //             only: true,
+        //         }
+        //     }))
+        // });
         // describe('delete', () => {
         //     describe('nothing to do', testSetup({
         //         app: loadApp({path: '../src/index', key: 'handler'}),
@@ -69,7 +87,7 @@ describe('lambda', () => {
         //         }
         //     }))
         // });
-    });
+    // });
     // describe('CognitoDomain', () => {
     //     describe('delete', () => {
     //         describe('missing resource', testSetup({

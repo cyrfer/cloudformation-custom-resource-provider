@@ -11,7 +11,7 @@ const errorsEnum = {
     PROPS_VALIDATION: 'PROPS_VALIDATION',
 };
 
-const schemaDomainProps = {
+const schemaProps = {
     "type": "object",
     "required": [
         "UserPoolId",
@@ -23,7 +23,7 @@ const schemaDomainProps = {
     }
 };
 
-const validateProps = compile(schemaDomainProps);
+const validateProps = compile(schemaProps);
 
 // adapted from
 // https://github.com/rosberglinhares/CloudFormationCognitoCustomResources/blob/master/CloudFormationCognitoUserPoolDomain.js

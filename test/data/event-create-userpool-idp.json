@@ -1,0 +1,13 @@
+{
+    "RequestType": "Create",
+    "ServiceToken": "arn:aws:lambda:us-west-2:<omitted>:function:cfn-custom-resource-function",
+    "ResponseURL": "https://cloudformation-custom-resource-response-uswest2.s3-us-west-2.amazonaws.com/<omitted>",
+    "StackId": "arn:aws:cloudformation:us-west-2:<omitted>:stack/crowdsource-auth-dev/ff714bb0-a188-11e9-9d37-0aa59f35fd42",
+    "RequestId": "57d4d881-cb06-434f-b60b-3c7de8c00768",
+    "LogicalResourceId": "SAMLIdP",
+    "ResourceType": "Custom::CognitoUserPoolIdP",
+    "ResourceProperties": {
+        "ServiceToken": "arn:aws:lambda:us-west-2:<omitted>:function:cfn-custom-resource-function",
+        "UserPoolId": "us-west-2_foo"
+    }
+}
