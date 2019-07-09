@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 const Ajv = require('ajv');
+const { drillDown } = require('deepdown');
 const stringify = JSON.stringify;
-
 
 const compile = (schema) => {
     return (new Ajv({allErrors: true})).compile(schema);
@@ -30,7 +30,7 @@ const schemaProps = {
                 "ApplicationId": {"type": "string", "minLength": 1},
                 "ExternalId": {"type": "string", "minLength": 1},
                 "RoleArn": {"type": "string", "minLength": 1},
-                "UserDataShared": {"type": "boolean"}
+                "UserDataShared": {"enum": ["true", "false"]}
             }
         }
     },
@@ -47,7 +47,7 @@ const schemaProps = {
                 ]
             }
         },
-        "AllowedOAuthFlowsUserPoolClient": { "type": "boolean" },
+        "AllowedOAuthFlowsUserPoolClient": { "enum": ["true", "false"] },
         "AllowedOAuthScopes": {
             "type": "array",
             "items": {
@@ -110,6 +110,20 @@ module.exports = async (event) => {
                 return Promise.reject({type: errorsEnum.PROPS_VALIDATION, message: stringify(validateProps.errors)});
             }
             const { ServiceToken, ...params } = event.ResourceProperties;
+            if (typeof params.AllowedOAuthFlowsUserPoolClient === 'string') {
+                try {
+                    params.AllowedOAuthFlowsUserPoolClient = JSON.parse(params.AllowedOAuthFlowsUserPoolClient);
+                } catch (e) {
+                    console.warn(`cognitoappclientsettings/create: could not parse AllowedOAuthFlowsUserPoolClient[${params.AllowedOAuthFlowsUserPoolClient}]`);
+                }
+            }
+            if (typeof drillDown(params, 'AnalyticsConfiguration.UserDataShared'.split('.')) === 'string') {
+                try {
+                    params.AnalyticsConfiguration.UserDataShared = JSON.parse(params.AnalyticsConfiguration.UserDataShared);
+                } catch (e) {
+                    console.warn(`cognitoappclientsettings/create: could not parse AnalyticsConfiguration.UserDataShared[${params.AnalyticsConfiguration.UserDataShared}]`);
+                }
+            }
             const result = await cognitoIdentityServiceProvider.updateUserPoolClient(params).promise();
             console.log('cognitoappclientsettings/create: result:', stringify(result));
             return {
