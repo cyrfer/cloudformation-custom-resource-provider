@@ -82,6 +82,11 @@ Markdown tables created by [tablesgenerator](https://www.tablesgenerator.com/mar
 - *UserPoolId
 - AttributeMapping
 - IdpIdentifiers
+
+[CognitoIdentityPoolRoleMapping](https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_SetIdentityPoolRoles.html)
+- *(key: string)
+- *[RoleMapping](https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_RoleMapping.html)
+
 ## Convenience Resources
 ## External Resources
 ## Exotic Community Resources

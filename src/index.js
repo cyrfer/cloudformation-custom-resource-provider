@@ -10,7 +10,8 @@ const writeError = async (event, context, e) => {
 
 const writeSuccess = async (event, context, r) => {
     console.log('writeSuccess', r);
-    return sendResponse(event, context, StatusEnum.CFG_SUCCESS, r, r.physicalResourceId);
+    const { physicalResourceId, ...resultValues } = r;
+    return sendResponse(event, context, StatusEnum.CFG_SUCCESS, resultValues, physicalResourceId);
 };
 
 exports.handler = async (event, context) => {
