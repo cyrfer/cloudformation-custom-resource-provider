@@ -65,7 +65,7 @@ module.exports = async (event) => {
             const result = await cognitoIdentityServiceProvider.createIdentityProvider(params).promise();
             console.log('cognitouserpoolidp/create: result:', stringify(result));
             return {
-                physicalResourceId: event.ResourceProperties.ClientId,
+                physicalResourceId: event.ResourceProperties.UserPoolId + '/' + event.ResourceProperties.ProviderName,
             }
         }
         case 'Update': {
@@ -73,11 +73,11 @@ module.exports = async (event) => {
                 console.error(`invalid properties: ${stringify(validateProps.errors)}`);
                 return Promise.reject({type: errorsEnum.PROPS_VALIDATION, message: stringify(validateProps.errors)});
             }
-            const { ServiceToken, ...params } = event.ResourceProperties;
+            const { ServiceToken, ProviderType, ...params } = event.ResourceProperties;
             const result = await cognitoIdentityServiceProvider.updateIdentityProvider(params).promise();
             console.log('cognitouserpoolidp/create: result:', stringify(result));
             return {
-                physicalResourceId: event.ResourceProperties.ClientId,
+                physicalResourceId: event.PhysicalResourceId,
             }
         }
         case 'Delete':
