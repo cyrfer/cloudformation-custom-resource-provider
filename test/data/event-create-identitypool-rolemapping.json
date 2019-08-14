@@ -1,0 +1,21 @@
+{
+    "RequestType": "Create",
+    "ServiceToken": "arn:aws:lambda:us-west-2:147180035125:function:cfn-custom-resource-function",
+    "ResponseURL": "https://cloudformation-custom-resource-response-uswest2.s3-us-west-2.amazonaws.com/arn%3Aaws%3Acloudformation%3Aus-west-2%3A147180035125%3Astack/crowdsource-auth-dev/ff714bb0-a188-11e9-9d37-0aa59f35fd42%7CRoleMappings%7Cb6a6647a-06d9-45db-9459-2fc713f96f9a?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190814T071941Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7199&X-Amz-Credential=AKIA54RCMT6SG7Y5BKPL%2F20190814%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=5cb0f731c06dc3ae4061abbea829ecfe8c4456601439287dfe5a99b1c64604c8",
+    "StackId": "arn:aws:cloudformation:us-west-2:147180035125:stack/crowdsource-auth-dev/ff714bb0-a188-11e9-9d37-0aa59f35fd42",
+    "RequestId": "b6a6647a-06d9-45db-9459-2fc713f96f9a",
+    "LogicalResourceId": "RoleMappings",
+    "ResourceType": "Custom::CognitoIdentityPoolRoleMapping",
+    "ResourceProperties": {
+        "ServiceToken": "arn:aws:lambda:us-west-2:147180035125:function:cfn-custom-resource-function",
+        "Entries": [
+            {
+                "Value": {
+                    "Type": "Token",
+                    "AmbiguousRoleResolution": "AuthenticatedRole"
+                },
+                "Key": "cognito-idp.us-west-2.amazonaws.com/us-west-2_4gBywIKMf:1darrucj86sm8uiokb0dvfrmm4"
+            }
+        ]
+    }
+}
