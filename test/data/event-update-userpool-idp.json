@@ -1,0 +1,34 @@
+{
+    "RequestType": "Update",
+    "ServiceToken": "arn:aws:lambda:us-west-2:147180035125:function:cfn-custom-resource-function",
+    "ResponseURL": "https://cloudformation-custom-resource-response-uswest2.s3-us-west-2.amazonaws.com/arn%3Aaws%3Acloudformation%3Aus-west-2%3A147180035125%3Astack/crowdsource-auth-dev/ff714bb0-a188-11e9-9d37-0aa59f35fd42%7CSAMLIdP%7C28d4e42f-eaba-47a1-a834-590c2b735412?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190709T152759Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIA54RCMT6SG7Y5BKPL%2F20190709%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=34a8d2f88fd0de85ba569de83a8b19d52e838f1f4b507f6aff3ba9142fc038de",
+    "StackId": "arn:aws:cloudformation:us-west-2:147180035125:stack/crowdsource-auth-dev/ff714bb0-a188-11e9-9d37-0aa59f35fd42",
+    "RequestId": "28d4e42f-eaba-47a1-a834-590c2b735412",
+    "LogicalResourceId": "SAMLIdP",
+    "PhysicalResourceId": "2019/07/09/[$LATEST]5b4df1fbe1754861abaae0f9f78b15d3",
+    "ResourceType": "Custom::CognitoUserPoolIdP",
+    "ResourceProperties": {
+        "ServiceToken": "arn:aws:lambda:us-west-2:147180035125:function:cfn-custom-resource-function",
+        "ProviderName": "crowdsource-auth-dev-wb-okta",
+        "UserPoolId": "us-west-2_4gBywIKMf",
+        "AttributeMapping": {
+            "email": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+        },
+        "ProviderDetails": {
+            "MetadataURL": "https://tw.oktapreview.com/app/exkld86unmaNdoRh40h7/sso/saml/metadata"
+        },
+        "ProviderType": "SAML"
+    },
+    "OldResourceProperties": {
+        "ServiceToken": "arn:aws:lambda:us-west-2:147180035125:function:cfn-custom-resource-function",
+        "ProviderName": "crowdsource-auth-dev-wb-okta",
+        "UserPoolId": "us-west-2_4gBywIKMf",
+        "AttributeMapping": {
+            "email": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+        },
+        "ProviderDetails": {
+            "MetadataURL": "https://warnerbrosjkg-01.okta.com/app/exktft58pFUX1hs4Q356/sso/saml/metadata"
+        },
+        "ProviderType": "SAML"
+    }
+}

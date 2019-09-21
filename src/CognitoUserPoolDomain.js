@@ -1,15 +1,6 @@
 const AWS = require('aws-sdk');
-const Ajv = require('ajv');
+const lib = require('./lib');
 const stringify = JSON.stringify;
-
-
-const compile = (schema) => {
-    return (new Ajv({allErrors: true})).compile(schema);
-};
-
-const errorsEnum = {
-    PROPS_VALIDATION: 'PROPS_VALIDATION',
-};
 
 const schemaProps = {
     "type": "object",
@@ -23,7 +14,7 @@ const schemaProps = {
     }
 };
 
-const validateProps = compile(schemaProps);
+const validateProps = lib.compile(schemaProps);
 
 // adapted from
 // https://github.com/rosberglinhares/CloudFormationCognitoCustomResources/blob/master/CloudFormationCognitoUserPoolDomain.js
@@ -35,7 +26,7 @@ module.exports = async (event) => {
         case 'Create': {
             if (!validateProps(event.ResourceProperties)) {
                 console.error(`invalid properties: ${stringify(validateProps.errors)}`);
-                return Promise.reject({type: errorsEnum.PROPS_VALIDATION, message: stringify(validateProps.errors)});
+                return Promise.reject({type: lib.errorsEnum.PROPS_VALIDATION, message: stringify(validateProps.errors)});
             }
             const result = await cognitoIdentityServiceProvider.createUserPoolDomain({
                 UserPoolId: event.ResourceProperties.UserPoolId,

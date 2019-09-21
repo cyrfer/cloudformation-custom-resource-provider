@@ -17,6 +17,8 @@ const mockAwsResponse = (stub) => () => {
 const resultArgsCognitoCreateUserPool = sinon.stub();
 const cognitoCreateUserPool = sinon.stub();
 
+// IMAGINE A WORLD WHERE MOCKS COULD BE WRITTEN BY PEOPLE OTHER THAN DEVELOPERS.
+
 const mocksCreateCognitoDomain = [
     {httpResponseStatusCode: 200, httpResponseBody: {}, httpMethod: 'get', path: '.*', hostname: 'https://cloudformation-custom-resource-response-uswest2.s3-us-west-2.amazonaws.com'},
     {mock: cognitoCreateUserPool, moduleName: 'aws-sdk', method: 'createUserPool', className: 'CognitoIdentityServiceProvider', resultMethod: 'returns', resultArgs: [mockAwsResponse(resultArgsCognitoCreateUserPool)]},
@@ -44,22 +46,58 @@ const expectsCreateCognitoAppSettings = [];
 const mocksCreateCognitoUserPoolIdP = [];
 const expectsCreateCognitoUserPoolIdP = [];
 
+const mocksCreateCognitoIdentityPoolRoleMapping = [];
+const expectsCreateCognitoIdentityPoolRoleMapping = [];
+
+const mocksCreateStringReplace = [];
+const expectsStringReplace = [];
+
 describe('lambda', () => {
-    describe('CognitoUserPoolIdP', () => {
+    describe('StringReplace', () => {
         describe('create', () => {
             describe('apply custom resource', testSetup({
                 app: loadApp({path: '../src/index', key: 'handler'}),
                 test: {
                     name: 'should report success',
-                    args: loadInput([{__filepath: './data/event-create-userpool-idp.json'}, {}]),
-                    mocks: isIntegration ? [] : mocksCreateCognitoUserPoolIdP,
-                    expects: expectsCreateCognitoUserPoolIdP,
+                    args: loadInput([{__filepath: './data/event-create-stringreplace.json'}, {}]),
+                    mocks: isIntegration ? [] : mocksCreateStringReplace,
+                    expects: expectsStringReplace,
                     networkEnabled: isIntegration,
                     only: true,
                 }
             }))
         })
-    });
+    })
+    // describe('CognitoIdentityPoolRoleMapping', () => {
+    //     describe('create', () => {
+    //         describe('apply custom resource', testSetup({
+    //             app: loadApp({path: '../src/index', key: 'handler'}),
+    //             test: {
+    //                 name: 'should report success',
+    //                 args: loadInput([{__filepath: './data/event-create-identitypool-rolemapping.json'}, {}]),
+    //                 mocks: isIntegration ? [] : mocksCreateCognitoIdentityPoolRoleMapping,
+    //                 expects: expectsCreateCognitoIdentityPoolRoleMapping,
+    //                 networkEnabled: isIntegration,
+    //                 only: true,
+    //             }
+    //         }))
+    //     })
+    // });
+    // describe('CognitoUserPoolIdP', () => {
+    //     describe('create', () => {
+    //         describe('apply custom resource', testSetup({
+    //             app: loadApp({path: '../src/index', key: 'handler'}),
+    //             test: {
+    //                 name: 'should report success',
+    //                 args: loadInput([{__filepath: './data/event-create-userpool-idp.json'}, {}]),
+    //                 mocks: isIntegration ? [] : mocksCreateCognitoUserPoolIdP,
+    //                 expects: expectsCreateCognitoUserPoolIdP,
+    //                 networkEnabled: isIntegration,
+    //                 only: true,
+    //             }
+    //         }))
+    //     })
+    // });
     // describe('CognitoAppClientSettings', () => {
         // describe('create', () => {
         //     describe('apply custom resource', testSetup({

@@ -1,14 +1,7 @@
 const uuidV4 = require('uuid/v4');
-const Ajv = require('ajv');
+const lib = require('./lib');
 const stringify = JSON.stringify;
 
-const compile = (schema) => {
-    return (new Ajv({allErrors: true})).compile(schema);
-};
-
-const errorsEnum = {
-    PROPS_VALIDATION: 'PROPS_VALIDATION',
-};
 
 // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CognitoIdentityServiceProvider.html#createIdentityProvider-property
 const schemaProps = {
@@ -91,7 +84,7 @@ const schemaProps = {
     }
 };
 
-const validateProps = compile(schemaProps);
+const validateProps = lib.compile(schemaProps);
 
 const transform = (accum, item) => {
     return {
@@ -107,7 +100,7 @@ module.exports = async (event) => {
         case 'Update': {
             if (!validateProps(event.ResourceProperties)) {
                 console.error(`invalid properties: ${stringify(validateProps.errors)}`);
-                return Promise.reject({type: errorsEnum.PROPS_VALIDATION, message: stringify(validateProps.errors)});
+                return Promise.reject({type: lib.errorsEnum.PROPS_VALIDATION, message: stringify(validateProps.errors)});
             }
             const { ServiceToken, Entries } = event.ResourceProperties;
             const mappings = Entries.reduce(transform, {});
