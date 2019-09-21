@@ -1,7 +1,7 @@
 const stringify = JSON.stringify;
-const types = require('./registry');
+const types = require('./src/registry');
 const resourceRegex = /Custom::(.+)/;
-const { sendResponse, StatusEnum } = require('./cfn-response');
+const { sendResponse, StatusEnum } = require('./src/cfn-response');
 
 const writeError = async (event, context, e) => {
     console.log('writeError', e);

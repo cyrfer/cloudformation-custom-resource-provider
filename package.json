@@ -6,7 +6,7 @@
   "module": "index.js",
   "scripts": {
     "test": "nyc mocha test/unit.js",
-    "zip": "rm -fr lambda.zip && zip -j lambda.zip dist/index.js",
+    "zip": "rm -fr lambda.zip && zip lambda.zip -r .",
     "webpack": "npx webpack --config webpack.config.js",
     "s3cpLambda": "aws s3 cp lambda.zip s3://contentnow-orch-lambda-functions/cfn-custom-resource/lambda.zip",
     "s3cpTemplate": "aws s3 cp infra/lambda.yaml s3://contentnow-dev-cf-templates/cfn-custom-resource/lambda.yaml",
@@ -14,7 +14,7 @@
     "cf_deploy": "cf_deploy.sh \"$STACK\" \"$AWS_PROFILE\" \"$TEMPLATE_URL\" \"$PARAMETERS\" \"--capabilities CAPABILITY_IAM\"",
     "deploy2": "TEMPLATE_URL=\"https://${TemplatesBucket}.s3.amazonaws.com/${TemplateUrlSubfolder}/lambda.yaml\" STACK=\"cfn-custom-resource\" AWS_PROFILE=\"default\" PARAMETERS=\"--parameters ParameterKey=S3Key,ParameterValue=cfn-custom-resource/lambda.zip ParameterKey=S3Bucket,ParameterValue=contentnow-orch-lambda-functions\" npm run cf_deploy",
     "deploy": "npm run s3cpTemplate && TemplatesBucket=\"contentnow-dev-cf-templates\" TemplateUrlSubfolder=\"cfn-custom-resource\" npm run deploy2",
-    "update-lambda": "npm run webpack && npm run zip && aws lambda update-function-code --function-name cfn-custom-resource-function --zip-file=fileb://./lambda.zip"
+    "update-lambda": "npm run zip && aws lambda update-function-code --function-name cfn-custom-resource-function --zip-file=fileb://./lambda.zip"
   },
   "repository": {
     "type": "git",
@@ -44,7 +44,6 @@
   "dependencies": {
     "ajv": "^6.10.1",
     "aws-sdk": "^2.488.0",
-    "axios": "^0.19.0",
     "deepdown": "^1.0.4",
     "uuid": "^3.3.2"
   }
