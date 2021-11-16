@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "ajv": "^6.10.1",
-    "aws-sdk": "^2.488.0",
+    "aws-sdk": "^2.814.0",
     "deepdown": "^1.0.4",
     "uuid": "^3.3.2"
   }
