@@ -42,7 +42,7 @@
     "webpack-cli": "^3.3.5"
   },
   "dependencies": {
-    "ajv": "^6.10.1",
+    "ajv": "^6.12.3",
     "aws-sdk": "^2.488.0",
     "deepdown": "^1.0.4",
     "uuid": "^3.3.2"
